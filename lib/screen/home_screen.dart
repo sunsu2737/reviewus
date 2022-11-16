@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                 md: 6,
                 child: InkWell(
                   onTap: () {
-                    print(3);
+                    Navigator.pushNamed(context, "/wating_list");
                   },
                   child: Container(
                       height: 540.h,
@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                 md: 6,
                 child: InkWell(
                   onTap: () {
-                    print(4);
+                    Navigator.pushNamed(context, "/dashboard");
                   },
                   child: Container(
                       height: 540.h,

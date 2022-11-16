@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:review/screen/dashboard_screen.dart';
 import 'package:review/screen/home_screen.dart';
 import 'package:review/screen/login_screen.dart';
 import 'package:review/screen/reflection_list_screen.dart';
 import 'package:review/screen/review_list_screen.dart';
+import 'package:review/screen/wating_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +30,9 @@ class MyApp extends StatelessWidget {
               "/login": (context) => LoginScreen(),
               '/': (context) => HomeScreen(),
               "/review_list": (context) => ReviewListScreen(),
-              "/reflection_list": (context) => ReflectionListScreen()
+              "/reflection_list": (context) => ReflectionListScreen(),
+              "/wating_list": (context) => WatingListScreen(),
+              "/dashboard":(context) => DashboardScreen()
             },
           );
         });
