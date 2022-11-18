@@ -21,14 +21,14 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1920, 1080),
         builder: (context, child) {
           return MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Review:Us',
             theme: ThemeData(
               primarySwatch: Colors.blueGrey,
             ),
             initialRoute: '/',
             routes: {
-              "/login": (context) => LoginScreen(),
-              '/': (context) => HomeScreen(),
+              "/": (context) => LoginScreen(),
+              '/home': (context) => HomeScreen(),
               "/review_list": (context) => ReviewListScreen(),
               "/reflection_list": (context) => ReflectionListScreen(),
               "/wating_list": (context) => WatingListScreen(),
