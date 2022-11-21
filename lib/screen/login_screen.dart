@@ -12,9 +12,20 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Container(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Review:Us",
+                style: TextStyle(fontSize: 80.sp),
+              ),
+            ),
             Text(
-              "Review:Us",
-              style: TextStyle(fontSize: 80.sp),
+              "for",
+              style: TextStyle(fontSize: 40.sp),
+            ),
+            Container(
+              child: Image.asset('assets/programmers.png'),
+              padding: EdgeInsets.only(top: 10),
             ),
             SizedBox(
               height: 80,
