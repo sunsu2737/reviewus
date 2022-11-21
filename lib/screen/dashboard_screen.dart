@@ -1,38 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:review/dialog/review_dialog.dart';
 import 'package:review/dialog/wating_dialog.dart';
+import 'package:review/models/review_view_model.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<List<String>> reviews = [
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "1차 진행중"
-      ],
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "2차 진행중"
-      ],
-    ];
+    final reviewProvider = Provider.of<ReviewProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("대시 보드"),
@@ -188,10 +167,11 @@ class DashboardScreen extends StatelessWidget {
               child: Container(
                 width: 1000,
                 child: ListView.builder(
-                  itemCount: reviews.length,
+                  itemCount: reviewProvider.reviews.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        onTap: () => watingDialog(context, reviews[index]),
+                        onTap: () => reviewDialog(
+                            context, reviewProvider.reviews[index]),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -202,14 +182,16 @@ class DashboardScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Icon(Icons.edit_note),
-                                  Text(reviews[0][2]),
-                                  Text(reviews[0][3]),
-                                  Text(reviews[0][4]),
+                                  Text(reviewProvider.reviews[index].presenter),
+                                  Text('Lv.' +
+                                      reviewProvider.reviews[index].level
+                                          .toString()),
+                                  Text(reviewProvider.reviews[index].category),
                                 ],
                               ),
                             ),
                             Text(
-                              reviews[index][0],
+                              reviewProvider.reviews[index].title,
                             ),
                             SizedBox(
                               width: 180,
