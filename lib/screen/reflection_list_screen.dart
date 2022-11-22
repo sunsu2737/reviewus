@@ -7,55 +7,30 @@ class ReflectionListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<List<String>> reviews = [
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "1차 진행중"
-      ],
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "2차 진행중"
-      ],
-    ];
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("리뷰 반영"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Container(
-          width: 500,
-          child: ListView.builder(
-            itemCount: reviews.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () => reviewDialog(context, reviews[index]),
-                title: Text(
-                  reviews[index][0],
-                  textAlign: TextAlign.center,
-                ),
-                trailing: Text(reviews[index][2]),
-              );
-            },
-          ),
-        ),
-      ),
-    );
+    return Center();
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text("리뷰 반영"),
+    //     centerTitle: true,
+    //   ),
+    //   body: Center(
+    //     child: Container(
+    //       width: 500,
+    //       child: ListView.builder(
+    //         itemCount: reviews.length,
+    //         itemBuilder: (context, index) {
+    //           return ListTile(
+    //             onTap: () => reviewDialog(context, reviews),
+    //             title: Text(
+    //               reviews[index][0],
+    //               textAlign: TextAlign.center,
+    //             ),
+    //             trailing: Text(reviews[index][2]),
+    //           );
+    //         },
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
