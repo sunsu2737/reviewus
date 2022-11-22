@@ -6,23 +6,19 @@ import 'package:review/models/review_model.dart';
 
 class ReviewProvider with ChangeNotifier {
   late CollectionReference reviewReference;
+  List<Review> dashboard = [];
   List<Review> reviews = [];
+  List<Review> watings = [];
+  List<Review> reflections = [];
+  FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  ReviewProvider({reference}) {
-    reviewReference =
-        reference ?? FirebaseFirestore.instance.collection('review');
+  Stream<List<Review>> getReviews() {
+    return _db.collection("review").snapshots().map((snapShot) =>
+        snapShot.docs.map((e) => Review.fromSnapshot(e)).toList());
   }
 
-  Future<void> fetchReviews() async {
-    reviews = await reviewReference.get().then(
-      (QuerySnapshot results) {
-        return results.docs.map((DocumentSnapshot document) {
-          return Review.fromSnapshot(document);
-        }).toList();
-      },
-    );
+  void toDashboard(data) {
+    dashboard = data;
     notifyListeners();
   }
-
-  
 }

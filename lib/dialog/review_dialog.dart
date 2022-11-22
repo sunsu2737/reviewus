@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:review/models/review_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void reviewDialog(context, review) {
+void reviewDialog(context, Review review) {
   showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          icon: Text(review[9]),
+          icon: Text(review.state),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           //Dialog Main Title
           title: Column(
             children: <Widget>[
-              new Text(review[0]),
+              new Text(review.title),
             ],
           ),
           contentPadding: EdgeInsets.all(20),
@@ -26,10 +27,10 @@ void reviewDialog(context, review) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "제작: " + review[2],
+                    "제작: " + review.presenter,
                   ),
                   Text(
-                    "레벨: " + review[3],
+                    "레벨: " + review.level.toString(),
                   ),
                 ],
               ),
@@ -37,7 +38,7 @@ void reviewDialog(context, review) {
                 height: 15,
               ),
               Text(
-                "분류: " + review[4],
+                "분류: " + review.category,
               ),
               SizedBox(
                 height: 15,
@@ -46,31 +47,31 @@ void reviewDialog(context, review) {
                 onOpen: (link) async {
                   launchUrl(Uri.parse(link.url));
                 },
-                text: "문제 링크: " + review[1],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "1차 검수자: " + review[5],
-              ),
-              Linkify(
-                onOpen: (link) async {
-                  launchUrl(Uri.parse(link.url));
-                },
-                text: "1차 검수 파일: " + review[6],
+                text: "문제 링크: " + review.challengeUrl,
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
-                "2차 검수자: " + review[7],
+                "1차 검수자: " + review.firstInspector,
               ),
               Linkify(
                 onOpen: (link) async {
                   launchUrl(Uri.parse(link.url));
                 },
-                text: "2차 검수 파일: " + review[8],
+                text: "1차 검수 파일: " + review.firstInspectUrl,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "2차 검수자: " + review.secondInspector,
+              ),
+              Linkify(
+                onOpen: (link) async {
+                  launchUrl(Uri.parse(link.url));
+                },
+                text: "2차 검수 파일: " + review.secondInspectUrl,
               ),
             ],
           ),

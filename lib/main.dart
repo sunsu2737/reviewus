@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:review/firebase_options.dart';
 import 'package:review/models/auth_model.dart';
 import 'package:review/models/login_model.dart';
+import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
 import 'package:review/screen/dashboard_screen.dart';
 import 'package:review/screen/home_screen.dart';
@@ -12,6 +13,7 @@ import 'package:review/screen/login_screen.dart';
 import 'package:review/screen/reflection_list_screen.dart';
 import 'package:review/screen/register_screen.dart';
 import 'package:review/screen/review_list_screen.dart';
+import 'package:review/screen/splash_screen.dart';
 import 'package:review/screen/wating_list_screen.dart';
 
 Future<void> main() async {
@@ -34,7 +36,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LoginFieldModel(),
         ),
-        ChangeNotifierProvider(create:(context) => ReviewProvider(),)
+        ChangeNotifierProvider(
+          create: (context) => ReviewProvider(),
+        ),
+
       ],
       child: ScreenUtilInit(
           designSize: const Size(1920, 1080),
@@ -46,13 +51,14 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: {
-                "/": (context) => LoginScreen(),
+                "/login": (context) => LoginScreen(),
                 '/home': (context) => HomeScreen(),
                 "/review_list": (context) => ReviewListScreen(),
                 "/reflection_list": (context) => ReflectionListScreen(),
                 "/wating_list": (context) => WatingListScreen(),
                 "/dashboard": (context) => DashboardScreen(),
-                '/register': (context) => RegisterScreen()
+                '/register': (context) => RegisterScreen(),
+                '/': (context) => SplashScreen()
               },
             );
           }),

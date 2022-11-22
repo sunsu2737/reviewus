@@ -167,31 +167,27 @@ class DashboardScreen extends StatelessWidget {
               child: Container(
                 width: 1000,
                 child: ListView.builder(
-                  itemCount: reviewProvider.reviews.length,
+                  itemCount: reviewProvider.dashboard.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                         onTap: () => reviewDialog(
-                            context, reviewProvider.reviews[index]),
+                            context, reviewProvider.dashboard[index]),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              width: 180,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Icon(Icons.edit_note),
-                                  Text(reviewProvider.reviews[index].presenter),
-                                  Text('Lv.' +
-                                      reviewProvider.reviews[index].level
-                                          .toString()),
-                                  Text(reviewProvider.reviews[index].category),
-                                ],
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.edit_note),
+                                Text(reviewProvider.dashboard[index].presenter),
+                                Text('Lv.' +
+                                    reviewProvider.dashboard[index].level
+                                        .toString()),
+                                Text(reviewProvider.dashboard[index].category),
+                              ],
                             ),
                             Text(
-                              reviewProvider.reviews[index].title,
+                              reviewProvider.dashboard[index].title,
                             ),
                             SizedBox(
                               width: 180,

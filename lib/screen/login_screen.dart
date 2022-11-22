@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(SnackBar(content: Text('안녕하세요.')));
-                      Navigator.of(context).pushReplacementNamed('/home');
+                      Navigator.of(context).pushReplacementNamed('/');
                     } else if (value == AuthStatus.verifiedFail) {
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
