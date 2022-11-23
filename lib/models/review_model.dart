@@ -43,7 +43,6 @@ class Review {
 
   Map<String, dynamic> toSnapshot() {
     return {
-      'id': id,
       'title': title,
       'presenter': presenter,
       'level': level,

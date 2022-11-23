@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:review/firebase_options.dart';
 import 'package:review/models/auth_model.dart';
+import 'package:review/models/info_model.dart';
 import 'package:review/models/login_model.dart';
 import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
@@ -39,7 +40,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ReviewProvider(),
         ),
-
+        ChangeNotifierProvider(
+          create: (context) => InfoProvider(),
+        )
       ],
       child: ScreenUtilInit(
           designSize: const Size(1920, 1080),

@@ -12,6 +12,17 @@ class ReviewProvider with ChangeNotifier {
   List<Review> reflections = [];
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  late String? id;
+  late String title;
+  late String presenter = "brady";
+  late int level = 0;
+  late String category = "해시";
+  late String challengeUrl;
+  late String firstInspector = "brady";
+  late String firstInspectUrl;
+  late String secondInspector = "brady";
+  late String secondInspectUrl;
+
   Stream<List<Review>> getReviews() {
     return _db.collection("review").snapshots().map((snapShot) =>
         snapShot.docs.map((e) => Review.fromSnapshot(e)).toList());
@@ -19,6 +30,55 @@ class ReviewProvider with ChangeNotifier {
 
   void toDashboard(data) {
     dashboard = data;
+    notifyListeners();
+  }
+
+  Future<void> addReview(Review review) async {
+    await _db.collection('review').add(review.toSnapshot());
+  }
+
+  void setTitle(data) {
+    title = data;
+    notifyListeners();
+  }
+
+  void setPresenter(data) {
+    presenter = data;
+    notifyListeners();
+  }
+
+  void setLevel(data) {
+    level = data;
+    notifyListeners();
+  }
+
+  void setCategory(data) {
+    category = data;
+    notifyListeners();
+  }
+
+  void setChallengeUrl(data) {
+    challengeUrl = data;
+    notifyListeners();
+  }
+
+  void setFirstinspector(data) {
+    firstInspector = data;
+    notifyListeners();
+  }
+
+  void setFirstinspectUrl(data) {
+    firstInspectUrl = data;
+    notifyListeners();
+  }
+
+  void setSecondinspector(data) {
+    secondInspector = data;
+    notifyListeners();
+  }
+
+  void setSecondinspectUrl(data) {
+    secondInspectUrl = data;
     notifyListeners();
   }
 }

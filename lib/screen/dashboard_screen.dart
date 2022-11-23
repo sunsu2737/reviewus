@@ -170,32 +170,29 @@ class DashboardScreen extends StatelessWidget {
                   itemCount: reviewProvider.dashboard.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        onTap: () => reviewDialog(
-                            context, reviewProvider.dashboard[index]),
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Icon(Icons.edit_note),
-                                Text(reviewProvider.dashboard[index].presenter),
-                                Text('Lv.' +
-                                    reviewProvider.dashboard[index].level
-                                        .toString()),
-                                Text(reviewProvider.dashboard[index].category),
-                              ],
-                            ),
-                            Text(
-                              reviewProvider.dashboard[index].title,
-                            ),
-                            SizedBox(
-                              width: 180,
-                            )
-                          ],
-                        ),
-                        trailing: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.delete)));
+                      onTap: () => reviewDialog(
+                          context, reviewProvider.dashboard[index]),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.edit_note),
+                          Text(reviewProvider.dashboard[index].presenter),
+                          Text('Lv.' +
+                              reviewProvider.dashboard[index].level.toString()),
+                          Text(reviewProvider.dashboard[index].category),
+                          SizedBox(
+                            width: 180,
+                          ),
+                          Text(
+                            reviewProvider.dashboard[index].title,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 180,
+                          )
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),
