@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,12 +16,14 @@ class FirebaseAuthProvider with ChangeNotifier {
   User? user;
 
   FirebaseAuthProvider({auth}) : authClient = auth ?? FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<AuthStatus> registerWithEmail(String email, String password) async {
     try {
       UserCredential credential = await authClient
           .createUserWithEmailAndPassword(email: email, password: password);
       authClient.currentUser?.sendEmailVerification();
+      _db.collection('users').add({"name": email.split('@')[0]});
       return AuthStatus.registerSuccess;
     } catch (e) {
       print(e);
@@ -42,7 +45,7 @@ class FirebaseAuthProvider with ChangeNotifier {
         print(user!.emailVerified);
         if (user!.emailVerified == false) {
           authStatus = AuthStatus.verifiedFail;
-        } 
+        }
       });
       print("[+] 로그인 유저: " + user!.email.toString());
       return authStatus;

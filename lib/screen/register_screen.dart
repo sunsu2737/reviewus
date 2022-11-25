@@ -141,8 +141,9 @@ class RegisterButton extends StatelessWidget {
                     registerFieldModel.passwordConfirm) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('계정 등록이 완료되었습니다! 이메일 인증을 완료해주세요.')));
-                
+                ..showSnackBar(
+                    SnackBar(content: Text('계정 등록이 완료되었습니다! 이메일 인증을 완료해주세요.')));
+
               Navigator.pop(context);
             } else {
               ScaffoldMessenger.of(context)

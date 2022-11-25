@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:review/dialog/review_dialog.dart';
-import 'package:review/dialog/wating_dialog.dart';
+import 'package:review/dialog/dashboard_dialog%20copy.dart';
 import 'package:review/models/review_view_model.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -45,11 +44,11 @@ class DashboardScreen extends StatelessWidget {
                 onChanged: (value) {},
               ),
               DropdownButton(
-                value: "작성자",
+                value: "출제자",
                 items: [
                   DropdownMenuItem(
-                    child: Text("작성자"),
-                    value: "작성자",
+                    child: Text("출제자"),
+                    value: "출제자",
                   ),
                   DropdownMenuItem(
                     child: Text("Brady"),
@@ -170,7 +169,7 @@ class DashboardScreen extends StatelessWidget {
                   itemCount: reviewProvider.dashboard.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      onTap: () => reviewDialog(
+                      onTap: () => dashboardDialog(
                           context, reviewProvider.dashboard[index]),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

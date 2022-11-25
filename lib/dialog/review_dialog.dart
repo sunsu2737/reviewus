@@ -27,7 +27,7 @@ void reviewDialog(context, Review review) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "제작: " + review.presenter,
+                    "출제: " + review.presenter,
                   ),
                   Text(
                     "레벨: " + review.level.toString(),

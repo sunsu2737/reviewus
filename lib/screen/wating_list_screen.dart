@@ -1,37 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:review/dialog/wating_dialog.dart';
+import 'package:review/models/review_view_model.dart';
 
 class WatingListScreen extends StatelessWidget {
   const WatingListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<List<String>> reviews = [
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "1차 진행중"
-      ],
-      [
-        "사과따기",
-        "https://google.com",
-        "Brady",
-        "2",
-        "Greedy",
-        "Louis",
-        "https://naver.com",
-        "Jaron",
-        "",
-        "2차 진행중"
-      ],
-    ];
+    final reviewProvider = Provider.of<ReviewProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("요청한 리뷰"),
@@ -41,16 +18,17 @@ class WatingListScreen extends StatelessWidget {
         child: Container(
           width: 500,
           child: ListView.builder(
-            itemCount: reviews.length,
+            itemCount: reviewProvider.watings.length,
             itemBuilder: (context, index) {
               return ListTile(
-                  onTap: () => watingDialog(context, reviews[index]),
-                  title: Text(
-                    reviews[index][0],
-                    textAlign: TextAlign.center,
-                  ),
-                  trailing:
-                      IconButton(onPressed: () {}, icon: Icon(Icons.delete)));
+                onTap: () =>
+                    watingDialog(context, reviewProvider.watings[index]),
+                title: Text(
+                  reviewProvider.watings[index].title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              );
             },
           ),
         ),

@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:review/models/review_model.dart';
+import 'package:review/storage/user_info.dart';
 
 class ReviewProvider with ChangeNotifier {
   late CollectionReference reviewReference;
@@ -30,6 +31,47 @@ class ReviewProvider with ChangeNotifier {
 
   void toDashboard(data) {
     dashboard = data;
+    notifyListeners();
+  }
+
+  void toWaitings(data) {
+    List<Review> temp = [];
+    for (Review d in data) {
+      print(d.presenter);
+      print(userName);
+      if ((d.state == "1차 리뷰 중" || d.state == "2차 리뷰 중") &&
+          d.presenter + "@grepp.co" == userName) {
+        temp.add(d);
+      }
+    }
+    watings = temp;
+    notifyListeners();
+  }
+
+  void toReflections(data) {
+    List<Review> temp = [];
+    for (Review d in data) {
+      print(d.presenter);
+      print(userName);
+      if ((d.state == "1차 반영 중" || d.state == "2차 반영 중") &&
+          d.presenter + "@grepp.co" == userName) {
+        temp.add(d);
+      }
+    }
+    reflections = temp;
+    notifyListeners();
+  }
+
+  void toReviews(data) {
+    List<Review> temp = [];
+    for (Review d in data) {
+      if ((d.state == "1차 리뷰 중" || d.state == "2차 리뷰 중") &&
+          (d.firstInspector + "@grepp.co" == userName ||
+              d.secondInspector + "@grepp.co" == userName)) {
+        temp.add(d);
+      }
+    }
+    reviews = temp;
     notifyListeners();
   }
 

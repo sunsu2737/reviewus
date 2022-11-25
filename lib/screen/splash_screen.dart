@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:review/models/auth_model.dart';
 import 'package:review/models/info_model.dart';
+import 'package:review/storage/user_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isLogin = prefs.getBool('isLogin') ?? false;
     final authClient =
         Provider.of<FirebaseAuthProvider>(context, listen: false);
-    final infoProvider = Provider.of<InfoProvider>(context, listen: false);
 
     print("[*] 로그인 상태 : " + isLogin.toString());
     if (isLogin) {
@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await authClient.loginWithEmail(email!, password!).then((loginStatus) {
         if (loginStatus == AuthStatus.loginSuccess) {
           print("[+] 로그인 성공");
+          userName = email;
         } else {
           isLogin = false;
           print("[-] 로그인 실패");
@@ -36,9 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       });
     }
-    if (isLogin) {
-      await infoProvider.getUserList();
-    }
+
     return isLogin;
   }
 

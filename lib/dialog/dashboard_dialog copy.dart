@@ -3,7 +3,7 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:review/models/review_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void watingDialog(context, Review review) {
+void dashboardDialog(context, Review review) {
   showDialog(
       context: context,
       barrierDismissible: false,
@@ -80,7 +80,7 @@ void watingDialog(context, Review review) {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("요청 취소")),
+                child: Text("삭제")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:review/dialog/add_dialog.dart';
+import 'package:review/models/info_model.dart';
 import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
 
@@ -13,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reviewProvider = Provider.of<ReviewProvider>(context);
+    final infoProvider = Provider.of<InfoProvider>(context, listen: false);
 
     return StreamBuilder(
         stream: reviewProvider.getReviews(),
@@ -23,9 +25,14 @@ class HomeScreen extends StatelessWidget {
             );
           } else {
             reviewProvider.toDashboard(snapshot.data);
+            reviewProvider.toWaitings(snapshot.data);
+            reviewProvider.toReviews(snapshot.data);
+            reviewProvider.toReflections(snapshot.data);
             return Scaffold(
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await infoProvider.getUserList();
+
                     addDialog(context);
                   },
                   child: Icon(Icons.add),
@@ -55,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                                     height: 25,
                                   ),
                                   Text(
-                                    "0",
+                                    reviewProvider.reviews.length.toString(),
                                     style: TextStyle(fontSize: 40.sp),
                                   )
                                 ],
@@ -84,7 +91,8 @@ class HomeScreen extends StatelessWidget {
                                     height: 25,
                                   ),
                                   Text(
-                                    "0",
+                                    reviewProvider.reflections.length
+                                        .toString(),
                                     style: TextStyle(fontSize: 40.sp),
                                   )
                                 ],
@@ -113,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                                     height: 25,
                                   ),
                                   Text(
-                                    "0",
+                                    reviewProvider.watings.length.toString(),
                                     style: TextStyle(fontSize: 40.sp),
                                   )
                                 ],
