@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     return StreamBuilder(
         stream: reviewProvider.getReviews(),
         builder: (context, AsyncSnapshot<List<Review>> snapshot) {
-          if (snapshot.data == null) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: Align(child: new CircularProgressIndicator()),
             );
