@@ -38,13 +38,6 @@ class WatingListScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () {
-                            reviewProvider.deleteReview(
-                                reviewProvider.watings[index].id!);
-                          },
-                        ),
                       );
                     },
                   ),

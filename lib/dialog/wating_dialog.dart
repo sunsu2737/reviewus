@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:provider/provider.dart';
+import 'package:review/dialog/confirm_dialog.dart';
 import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -79,6 +80,11 @@ void watingDialog(context, Review review) {
             ],
           ),
           actions: [
+            ElevatedButton(
+                onPressed: () {
+                  confirmDialog(context, "삭제", review.id!);
+                },
+                child: Text("삭제")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
