@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reviewProvider = Provider.of<ReviewProvider>(context);
+    final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
     final infoProvider = Provider.of<InfoProvider>(context, listen: false);
 
     return StreamBuilder(
