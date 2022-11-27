@@ -29,6 +29,14 @@ class ReviewProvider with ChangeNotifier {
         snapShot.docs.map((e) => Review.fromSnapshot(e)).toList());
   }
 
+  void deleteReview(String id) {
+    _db.collection('review').doc(id).delete();
+    dashboard.removeWhere((element) => element.id == id);
+    reviews.removeWhere((element) => element.id == id);
+    watings.removeWhere((element) => element.id == id);
+    reflections.removeWhere((element) => element.id == id);
+  }
+
   void toDashboard(data) {
     dashboard = data;
     notifyListeners();

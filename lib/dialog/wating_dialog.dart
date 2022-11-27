@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:provider/provider.dart';
 import 'package:review/models/review_model.dart';
+import 'package:review/models/review_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void watingDialog(context, Review review) {
+  final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
   showDialog(
       context: context,
       barrierDismissible: false,
@@ -76,11 +79,6 @@ void watingDialog(context, Review review) {
             ],
           ),
           actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("요청 취소")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
