@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:review/models/auth_model.dart';
 import 'package:review/models/info_model.dart';
+import 'package:review/models/review_view_model.dart';
 import 'package:review/storage/user_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isLogin = prefs.getBool('isLogin') ?? false;
     final authClient =
         Provider.of<FirebaseAuthProvider>(context, listen: false);
-
+    final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
     print("[*] 로그인 상태 : " + isLogin.toString());
     if (isLogin) {
       String? email = prefs.getString('email');
@@ -30,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (loginStatus == AuthStatus.loginSuccess) {
           print("[+] 로그인 성공");
           userName = email;
+          reviewProvider.setPresenter(email.split("@")[0]);
         } else {
           isLogin = false;
           print("[-] 로그인 실패");

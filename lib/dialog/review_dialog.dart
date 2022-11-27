@@ -79,7 +79,7 @@ void reviewDialog(context, Review review) {
           actions: [
             ElevatedButton(
                 onPressed: () {
-                  completeDialog(context, review.id!, review.state);
+                  completeDialog(context, review);
                 },
                 child: Text("완료")),
             ElevatedButton(

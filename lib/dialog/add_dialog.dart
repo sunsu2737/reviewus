@@ -10,7 +10,7 @@ void addDialog(context) {
   final levels = infoProvider.levelList;
   final categorys = infoProvider.categoryList;
   final users = infoProvider.userList;
-
+  reviewProvider.firstInspector = "";
   showDialog(
       context: context,
       barrierDismissible: false,
@@ -75,8 +75,8 @@ void addDialog(context) {
                                 DropdownMenuItem(value: e, child: Text(e)))
                             .toList(),
                         onChanged: (item) {
-                          setState(() {});
                           reviewProvider.setCategory(item);
+                          setState(() {});
                         }),
                   ],
                 ),
@@ -100,14 +100,17 @@ void addDialog(context) {
                       width: 20,
                     ),
                     DropdownButton<String>(
-                        value: reviewProvider.firstInspector,
+                        hint: Text("1차 검수자"),
+                        value: reviewProvider.firstInspector == ""
+                            ? null
+                            : reviewProvider.firstInspector,
                         items: users
                             .map((e) =>
                                 DropdownMenuItem(value: e, child: Text(e)))
                             .toList(),
-                        onChanged: (item) {
-                          setState(() {});
+                        onChanged: (String? item) {
                           reviewProvider.setFirstinspector(item);
+                          setState(() {});
                         }),
                   ],
                 ),
@@ -128,14 +131,17 @@ void addDialog(context) {
                       width: 20,
                     ),
                     DropdownButton<String>(
-                        value: reviewProvider.secondInspector,
+                        hint: Text("2차 검수자"),
+                        value: reviewProvider.secondInspector == "없음"
+                            ? null
+                            : reviewProvider.secondInspector,
                         items: users
                             .map((e) =>
                                 DropdownMenuItem(value: e, child: Text(e)))
                             .toList(),
                         onChanged: (item) {
-                          setState(() {});
                           reviewProvider.setSecondinspector(item);
+                          setState(() {});
                         }),
                   ],
                 ),
@@ -150,6 +156,7 @@ void addDialog(context) {
             actions: [
               ElevatedButton(
                   onPressed: () {
+                    if (reviewProvider.firstInspector == "") return;
                     Review review = Review(
                         title: reviewProvider.title,
                         presenter: reviewProvider.presenter,

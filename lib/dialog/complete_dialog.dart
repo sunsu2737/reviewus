@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
 
-void completeDialog(context, id, state) {
+void completeDialog(context, Review review) {
   final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
   showDialog(
     context: context,
@@ -13,7 +14,7 @@ void completeDialog(context, id, state) {
       actions: [
         ElevatedButton(
             onPressed: () {
-              reviewProvider.completeReview(id, state);
+              reviewProvider.completeReview(review);
               Navigator.pop(context);
               Navigator.pop(context);
             },

@@ -15,13 +15,13 @@ class ReviewProvider with ChangeNotifier {
 
   late String? id;
   late String title;
-  late String presenter = "brady";
+  late String presenter;
   late int level = 0;
   late String category = "해시";
   late String challengeUrl;
-  late String firstInspector = "brady";
+  late String firstInspector = "";
   late String firstInspectUrl;
-  late String secondInspector = "brady";
+  late String secondInspector = "없음";
   late String secondInspectUrl;
 
   Stream<List<Review>> getReviews() {
@@ -37,15 +37,19 @@ class ReviewProvider with ChangeNotifier {
     // reflections.removeWhere((element) => element.id == id);
   }
 
-  void completeReview(String id, String state) {
-    if (state == "1차 리뷰 중") {
-      _db.collection('review').doc(id).update({"state": "1차 반영 중"});
-    } else if (state == "1차 반영 중") {
-      _db.collection('review').doc(id).update({"state": "2차 리뷰 중"});
-    } else if (state == "2차 리뷰 중") {
-      _db.collection('review').doc(id).update({"state": "2차 반영 중"});
-    } else if (state == "2차 반영 중") {
-      _db.collection('review').doc(id).update({"state": "완료"});
+  void completeReview(Review review) {
+    if (review.state == "1차 리뷰 중") {
+      _db.collection('review').doc(review.id).update({"state": "1차 반영 중"});
+    } else if (review.state == "1차 반영 중") {
+      if (review.secondInspector == "없음") {
+        _db.collection('review').doc(review.id).update({"state": "완료"});
+      } else {
+        _db.collection('review').doc(review.id).update({"state": "2차 리뷰 중"});
+      }
+    } else if (review.state == "2차 리뷰 중") {
+      _db.collection('review').doc(review.id).update({"state": "2차 반영 중"});
+    } else if (review.state == "2차 반영 중") {
+      _db.collection('review').doc(review.id).update({"state": "완료"});
     }
   }
 
