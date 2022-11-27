@@ -185,25 +185,36 @@ class DashboardScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(Icons.edit_note),
-                                  Text(reviewProvider
-                                      .dashboard[index].presenter),
-                                  Text('Lv.' +
-                                      reviewProvider.dashboard[index].level
-                                          .toString()),
-                                  Text(
-                                      reviewProvider.dashboard[index].category),
                                   SizedBox(
-                                    width: 180,
-                                  ),
-                                  Text(
-                                    reviewProvider.dashboard[index].title,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                      width: 100,
+                                      child: Text(
+                                        reviewProvider.dashboard[index].state,
+                                      )),
+                                  SizedBox(
+                                    width: 100,
+                                    child: Text(reviewProvider
+                                        .dashboard[index].presenter),
                                   ),
                                   SizedBox(
-                                    width: 180,
-                                  )
+                                    width: 100,
+                                    child: Text('Lv.' +
+                                        reviewProvider.dashboard[index].level
+                                            .toString()),
+                                  ),
+                                  SizedBox(
+                                    width: 100,
+                                    child: Text(reviewProvider
+                                        .dashboard[index].category),
+                                  ),
+                                  SizedBox(
+                                    width: 500,
+                                    child: Text(
+                                      reviewProvider.dashboard[index].title,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
                                 ],
                               ),
                             );
