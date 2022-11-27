@@ -82,7 +82,7 @@ void watingDialog(context, Review review) {
           actions: [
             ElevatedButton(
                 onPressed: () {
-                  confirmDialog(context, "삭제", review.id!);
+                  confirmDialog(context, review.id!);
                 },
                 child: Text("삭제")),
             ElevatedButton(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:review/dialog/complete_dialog.dart';
 import 'package:review/models/review_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,7 +79,7 @@ void reflectionDialog(context, Review review) {
           actions: [
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  completeDialog(context, review.id!, review.state);
                 },
                 child: Text("완료")),
             ElevatedButton(

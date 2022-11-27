@@ -37,6 +37,18 @@ class ReviewProvider with ChangeNotifier {
     // reflections.removeWhere((element) => element.id == id);
   }
 
+  void completeReview(String id, String state) {
+    if (state == "1차 리뷰 중") {
+      _db.collection('review').doc(id).update({"state": "1차 반영 중"});
+    } else if (state == "1차 반영 중") {
+      _db.collection('review').doc(id).update({"state": "2차 리뷰 중"});
+    } else if (state == "2차 리뷰 중") {
+      _db.collection('review').doc(id).update({"state": "2차 반영 중"});
+    } else if (state == "2차 반영 중") {
+      _db.collection('review').doc(id).update({"state": "완료"});
+    }
+  }
+
   void toDashboard(data) {
     dashboard = data;
     notifyListeners();
@@ -73,8 +85,9 @@ class ReviewProvider with ChangeNotifier {
   void toReviews(data) {
     List<Review> temp = [];
     for (Review d in data) {
-      if ((d.state == "1차 리뷰 중" || d.state == "2차 리뷰 중") &&
-          (d.firstInspector + "@grepp.co" == userName ||
+      if ((d.state == "1차 리뷰 중" &&
+              d.firstInspector + "@grepp.co" == userName) ||
+          (d.state == "2차 리뷰 중" &&
               d.secondInspector + "@grepp.co" == userName)) {
         temp.add(d);
       }
