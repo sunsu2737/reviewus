@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "358157558122",
+    "firebase_url": "https://reviewus-11434-default-rtdb.firebaseio.com",
     "project_id": "reviewus-11434",
     "storage_bucket": "reviewus-11434.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "358157558122-34p18lbhiif9ji1n6fm9tquiosljhmt4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "358157558122-fjr8q4dbsqac792mdj75m7mapsqntn93.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.review"
+              }
             }
           ]
         }

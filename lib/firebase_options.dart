@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -49,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '358157558122',
     projectId: 'reviewus-11434',
     authDomain: 'reviewus-11434.firebaseapp.com',
+    databaseURL: 'https://reviewus-11434-default-rtdb.firebaseio.com',
     storageBucket: 'reviewus-11434.appspot.com',
     measurementId: 'G-BRK3PQFWC4',
   );
@@ -58,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:358157558122:android:6c97aab327fd9db9968513',
     messagingSenderId: '358157558122',
     projectId: 'reviewus-11434',
+    databaseURL: 'https://reviewus-11434-default-rtdb.firebaseio.com',
     storageBucket: 'reviewus-11434.appspot.com',
   );
 
@@ -66,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:358157558122:ios:9ad154371e4235c6968513',
     messagingSenderId: '358157558122',
     projectId: 'reviewus-11434',
+    databaseURL: 'https://reviewus-11434-default-rtdb.firebaseio.com',
     storageBucket: 'reviewus-11434.appspot.com',
     iosClientId: '358157558122-fjr8q4dbsqac792mdj75m7mapsqntn93.apps.googleusercontent.com',
     iosBundleId: 'com.example.review',
@@ -76,8 +76,20 @@ class DefaultFirebaseOptions {
     appId: '1:358157558122:ios:9ad154371e4235c6968513',
     messagingSenderId: '358157558122',
     projectId: 'reviewus-11434',
+    databaseURL: 'https://reviewus-11434-default-rtdb.firebaseio.com',
     storageBucket: 'reviewus-11434.appspot.com',
     iosClientId: '358157558122-fjr8q4dbsqac792mdj75m7mapsqntn93.apps.googleusercontent.com',
     iosBundleId: 'com.example.review',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDew5RrGGG_ncyzIV2Mf4EWTfAqBcQ3kww',
+    appId: '1:358157558122:web:71167cb889f9dc2e968513',
+    messagingSenderId: '358157558122',
+    projectId: 'reviewus-11434',
+    authDomain: 'reviewus-11434.firebaseapp.com',
+    databaseURL: 'https://reviewus-11434-default-rtdb.firebaseio.com',
+    storageBucket: 'reviewus-11434.appspot.com',
+    measurementId: 'G-PZRWPH78GL',
   );
 }
