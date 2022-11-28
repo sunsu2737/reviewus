@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:review/dialog/dashboard_dialog%20copy.dart';
+import 'package:review/models/filter_model.dart';
+import 'package:review/models/info_model.dart';
 import 'package:review/models/review_model.dart';
 import 'package:review/models/review_view_model.dart';
 
@@ -10,8 +12,9 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
-
+    final reviewProvider = Provider.of<ReviewProvider>(context);
+    final infoProvider = Provider.of<InfoProvider>(context, listen: false);
+    final filterProvider = Provider.of<FilterProvider>(context);
     return StreamBuilder(
         stream: reviewProvider.getReviews(),
         builder: (context, AsyncSnapshot<List<Review>> snapshot) {
@@ -20,7 +23,14 @@ class DashboardScreen extends StatelessWidget {
               child: Align(child: new CircularProgressIndicator()),
             );
           } else {
-            reviewProvider.toDashboard(snapshot.data);
+            reviewProvider.toDashboard(
+                data: snapshot.data!,
+                sstate: filterProvider.state,
+                scategory: filterProvider.category,
+                sfirst: filterProvider.first,
+                slevel: filterProvider.level,
+                spresenter: filterProvider.presenter,
+                ssecond: filterProvider.second);
             return Scaffold(
               appBar: AppBar(
                 title: Text("대시 보드"),
@@ -32,136 +42,82 @@ class DashboardScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       DropdownButton(
-                        value: "상태",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("상태"),
-                            value: "상태",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("0"),
-                            value: "0",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.state == "전체"
+                            ? null
+                            : filterProvider.state,
+                        hint: Text("상태"),
+                        items: (["전체"] + infoProvider.stateList)
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectState(value!);
+                        },
                       ),
                       DropdownButton(
-                        value: "출제자",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("출제자"),
-                            value: "출제자",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Brady"),
-                            value: "Brady",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Jaron"),
-                            value: "Jaron",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Marble"),
-                            value: "Marble",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.presenter == "전체"
+                            ? null
+                            : filterProvider.presenter,
+                        hint: Text("출제자"),
+                        items: (["전체"] + infoProvider.userList)
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectPresenter(value!);
+                        },
                       ),
                       DropdownButton(
-                        value: "레벨",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("레벨"),
-                            value: "레벨",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("0"),
-                            value: "0",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.level == "전체"
+                            ? null
+                            : filterProvider.level,
+                        hint: Text("레벨"),
+                        items: (["전체"] + infoProvider.levelList)
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectLevel(value!);
+                        },
                       ),
                       DropdownButton(
-                        value: "분류",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("분류"),
-                            value: "분류",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("0"),
-                            value: "0",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.category == "전체"
+                            ? null
+                            : filterProvider.category,
+                        hint: Text("분류"),
+                        items: (["전체"] + infoProvider.categoryList)
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectCategory(value!);
+                        },
                       ),
                       DropdownButton(
-                        value: "1차 검수자",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("1차 검수자"),
-                            value: "1차 검수자",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("0"),
-                            value: "0",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.first == "전체"
+                            ? null
+                            : filterProvider.first,
+                        hint: Text("1차 검수자"),
+                        items: (["전체"] + infoProvider.userList)
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectFirst(value!);
+                        },
                       ),
                       DropdownButton(
-                        value: "2차 검수자",
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("2차 검수자"),
-                            value: "2차 검수자",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("0"),
-                            value: "0",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                        ],
-                        onChanged: (value) {},
+                        value: filterProvider.second == "전체"
+                            ? null
+                            : filterProvider.second,
+                        hint: Text("2차 검수자"),
+                        items: (["전체"] + infoProvider.userList + ["없음"])
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(e.toString())))
+                            .toList(),
+                        onChanged: (value) {
+                          filterProvider.selectSecond(value!);
+                        },
                       ),
                     ],
                   ),

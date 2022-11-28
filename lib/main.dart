@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:review/firebase_options.dart';
 import 'package:review/models/auth_model.dart';
+import 'package:review/models/filter_model.dart';
 import 'package:review/models/info_model.dart';
 import 'package:review/models/login_model.dart';
 import 'package:review/models/review_model.dart';
@@ -19,7 +20,7 @@ import 'package:review/screen/wating_list_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => InfoProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FilterProvider(),
         )
       ],
       child: ScreenUtilInit(

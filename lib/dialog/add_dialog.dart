@@ -46,14 +46,14 @@ void addDialog(context) {
                     SizedBox(
                       width: 20,
                     ),
-                    DropdownButton<int>(
-                        value: reviewProvider.level,
+                    DropdownButton<String>(
+                        value: reviewProvider.level.toString(),
                         items: levels
                             .map((e) => DropdownMenuItem(
                                 value: e, child: Text(e.toString())))
                             .toList(),
                         onChanged: (item) {
-                          reviewProvider.setLevel(item);
+                          reviewProvider.setLevel(int.parse(item!));
                           setState(() {});
                         }),
                   ],
@@ -135,7 +135,7 @@ void addDialog(context) {
                         value: reviewProvider.secondInspector == "없음"
                             ? null
                             : reviewProvider.secondInspector,
-                        items: users
+                        items: (users + ["없음"])
                             .map((e) =>
                                 DropdownMenuItem(value: e, child: Text(e)))
                             .toList(),

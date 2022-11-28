@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
               child: Align(child: new CircularProgressIndicator()),
             );
           } else {
-            reviewProvider.toDashboard(snapshot.data);
+            reviewProvider.toDashboard(data:snapshot.data!);
             reviewProvider.toWaitings(snapshot.data);
             reviewProvider.toReviews(snapshot.data);
             reviewProvider.toReflections(snapshot.data);
@@ -134,7 +134,8 @@ class HomeScreen extends StatelessWidget {
                         sm: 6,
                         md: 6,
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            await infoProvider.getUserList();
                             Navigator.pushNamed(context, "/dashboard");
                           },
                           child: Container(

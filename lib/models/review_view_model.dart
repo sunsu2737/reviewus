@@ -53,8 +53,26 @@ class ReviewProvider with ChangeNotifier {
     }
   }
 
-  void toDashboard(data) {
-    dashboard = data;
+  void toDashboard(
+      {required List<Review> data,
+      String sstate = "전체",
+      String spresenter = "전체",
+      String slevel = "전체",
+      String scategory = "전체",
+      String sfirst = "전체",
+      String ssecond = "전체"}) {
+    // print([sstate , slevel, scategory, sfirst, ssecond, spresenter]);
+    dashboard = data.where((element) {
+      return (sstate == "전체" || element.state == sstate) &&
+          (spresenter == "전체" || element.presenter == spresenter) &&
+          (slevel == "전체" || element.level.toString() == slevel) &&
+          (scategory == "전체" || element.category == scategory) &&
+          (sfirst == "전체" || element.firstInspector == sfirst) &&
+          (ssecond == "전체" || element.secondInspector == ssecond);
+    }).toList();
+    // print(dashboard.map(
+    //   (e) => e.title,
+    // ));
     notifyListeners();
   }
 
